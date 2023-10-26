@@ -1,0 +1,22 @@
+@startuml
+
+node "Web Server" {
+  frame "J2EE Container" {
+    component [App Component 1]
+    component [App Component 2]
+  } 
+}
+
+node "Database Server" {
+  frame "Oracle DB" {
+    component [DB Component 1]
+    component [DB Component 2]
+    component [DB Component 3]
+  }
+}
+
+
+[App Component 1] --> [DB Component 1] 
+[App Component 2] --> [DB Component 2]
+
+@enduml

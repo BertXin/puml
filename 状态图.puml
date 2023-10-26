@@ -1,0 +1,11 @@
+@startuml
+
+[*] -> State1
+State1 --> State2 : Succeed
+State1 --> [*] : Fail
+
+State2 -> State3 : Succeed
+State2 --> [*] : Fail
+
+State3 -> [*]
+@enduml

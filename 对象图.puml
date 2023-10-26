@@ -1,0 +1,19 @@
+@startuml
+
+object demo1
+object demo2
+object demo3
+object demo4
+
+demo1 : someClass
+demo1 : someAttribute = "someValue"
+
+demo2 : someOtherClass
+
+demo3 : yetAnotherClass 
+demo3 : yetAnotherAttribute = "value"
+
+demo1 -> demo2
+demo1 --> demo3
+
+@enduml

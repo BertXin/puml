@@ -1,0 +1,38 @@
+@startuml
+
+actor 用户 as user
+
+box "DevOps运维平台" #LightBlue
+participant "登录/注册" as 登录注册
+participant "应用管理" as 应用管理
+participant "项目管理" as 项目管理
+participant "环境管理" as 环境管理
+participant "凭证管理" as 凭证管理
+participant "构建中心" as 构建中心
+participant "应用发布" as 应用发布
+end box
+
+user -> 登录注册 : 登录/注册
+登录注册 -> 应用管理 : 进入应用管理
+
+opt 选择项目管理
+  应用管理 -> 项目管理 : 创建项目\n查看项目详情\n配置弹性伸缩
+end
+
+opt 选择环境管理
+  应用管理 -> 环境管理 : 维护环境基本信息 
+end
+
+opt 选择凭证管理
+  应用管理 -> 凭证管理 : 创建代码仓库凭证\n创建镜像仓库凭证
+end
+
+opt 选择构建中心
+  应用管理 -> 构建中心 : 创建流水线\n运行流水线
+end
+
+opt 选择应用发布
+  应用管理 -> 应用发布 : 新建发布单\n查看发布列表\n检查发布详情
+end
+
+@enduml

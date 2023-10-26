@@ -1,0 +1,47 @@
+@startuml
+
+start
+
+:用户登录;
+
+if (登录成功?) then (yes)
+
+  :进入应用管理模块;
+
+  if (选择项目管理?) then (yes)
+
+    :创建项目;
+    :查看项目详情;
+    :配置弹性伸缩;
+
+  elseif (选择环境管理?) then (yes)  
+
+    :维护环境基本信息;
+
+  elseif (选择凭证管理?) then (yes)
+
+    :创建代码仓库凭证;
+    :创建镜像仓库凭证;
+
+  elseif (选择构建中心?) then (yes)
+
+    :创建流水线;
+    :运行流水线;
+
+  elseif (选择应用发布?) then (yes)  
+
+    :新建发布单;
+    :查看发布列表;
+    :检查发布详情;
+
+  endif
+
+else (no)
+
+  :重新登录;
+
+endif
+
+stop
+
+@enduml
