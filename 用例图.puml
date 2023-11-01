@@ -1,9 +1,92 @@
 @startuml
 
-class Car
+left to right direction
 
-Driver - Car : drives >
-Car *- Wheel : have 4 >
-Car -- Person : < owns
+actor 用户 as user
 
+rectangle "DevOps运维平台" {
+
+  usecase "登录/注册" as UC1
+  usecase "应用管理" as UC2
+
+  user -- UC1
+  user -- UC2
+  
+}
+
+rectangle "登录/注册" {
+
+  usecase "本地登录" as UC5
+  usecase "第三方登录" as UC6
+
+  UC1 ..> UC5
+  UC1 ..> UC6
+
+}
+
+rectangle "应用管理" {
+
+  usecase "项目管理" as UC7
+  usecase "环境管理" as UC8
+  usecase "凭证管理" as UC9
+  usecase "构建中心" as UC10
+  usecase "应用发布" as UC11
+  
+  UC2 ..> UC7
+  UC2 ..> UC8
+  UC2 ..> UC9
+  UC2 ..> UC10
+  UC2 ..> UC11
+  
+}
+
+rectangle "项目管理" {
+
+  usecase "创建项目" as UC12
+  usecase "项目详情" as UC13
+  usecase "弹性伸缩配置" as UC14
+
+  UC7 ..> UC12
+  UC7 ..> UC13
+  UC7 ..> UC14
+
+}
+
+rectangle "凭证管理" {
+  
+  usecase "创建代码仓库凭证" as UC15
+  usecase "创建镜像仓库凭证" as UC16
+  
+  UC9 ..> UC15
+  UC9 ..> UC16
+
+}
+
+rectangle "应用发布" {
+
+  usecase "新建发布单" as UC17
+  usecase "发布列表" as UC18
+  usecase "发布详情" as UC19
+
+  UC11 ..> UC17 
+  UC11 ..> UC18
+  UC11 ..> UC19
+  
+}
+rectangle "构建中心" {
+
+  usecase "创建流水线" as UC20
+  usecase "运行流水线" as UC21
+
+  UC10 ..> UC20
+  UC10 ..> UC21
+
+}
+rectangle "环境管理" {
+
+  usecase "基本信息" as UC22
+
+  UC8 ..> UC22
+
+}
 @enduml
