@@ -1,0 +1,42 @@
+@startuml
+
+actor 用户 as user
+participant "登录界面" as loginUI
+participant "用户服务" as loginController
+participant "应用服务" as appService
+participant "环境服务" as envService
+participant "数据库" as db
+
+user -> loginUI : 登录平台 
+
+loginUI -> loginController ++ :验证登录
+loginController -> 登录成功
+
+user -> loginUI : 点击应用管理
+loginUI -> appService ++ :查询应用列表
+appService -> db ++ :获取应用列表
+db -->> appService -- :返回应用列表
+appService -->> loginUI -- :展示应用列表
+
+user -> loginUI : 点击创建应用 
+loginUI -> appService ++ : 打开创建应用页面
+
+user -> loginUI : 填写应用信息\n点击提交
+loginUI -> appService ++ : 创建应用\n写入数据库
+appService -> db ++ : 插入应用信息
+db -->> appService -- :应用创建成功 
+
+appService -> envService ++ : 打开创建环境页面
+
+user -> loginUI : 填写环境信息\n点击提交
+loginUI -> envService ++ : 创建环境\n写入数据库
+envService -> db ++ : 插入环境信息
+db -->> envService -- :环境创建成功
+
+envService -> appService ++ :关联环境与应用
+appService -> db ++ :更新应用环境关系
+db -->> appService -- :关联成功
+
+appService -->> loginUI -- : 应用及环境创建成功
+
+@enduml

@@ -1,32 +1,65 @@
 @startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
+entity "用户表user" as user {
+  id
+  username
 }
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
+entity "角色表role" as role {
+  id
+  name 
 }
-
-cloud {
-  [Example 1]
+entity "权限表permission" as permission {
+  id
+  pid
+  name
 }
-
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
+entity "菜单表menu" as menu {
+  id
+  name
+  icon 
+  path
 }
-
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
+entity "部门表dept" as dept {
+  id
+  name
+  sort
+  parent_id
+}
+entity "用户登录日志表user_login_logs" as user_login_logs {
+  id
+  username
+  login_type
+  client_ip
+}
+entity "审计事件表audit_events" as audit_events {
+  id
+  name
+  username
+}
+user ||--o{ role
+role }|--|| permission
+menu ||--o{ role
+dept ||--o{ user
+entity "应用表app" as app {
+  id
+  name
+}
+entity "环境表biz_env" as biz_env {
+  id
+  name 
+}
+entity "容器配置表container_env_config" as container_env_config {
+  id
+}
+entity "虚拟机配置表vm_env_config" as vm_env_config {
+  id
+}
+entity "虚拟机表virtual_machine" as virtual_machine {
+  id
+  uuid
+}
+app ||--o{ biz_env
+container_env_config ||--|{ app
+vm_env_config ||--|| app
+virtual_machine ||--|{ vm_env_config
+virtual_machine ||--|{ container_env_config
 @enduml

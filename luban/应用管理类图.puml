@@ -1,0 +1,57 @@
+@startuml
+
+class LoginUI {
+  + showPage()
+  + getUserInput()
+  + showResult()
+}
+
+class LoginController {
+  + login()
+  + createApp()
+  + createEnv()
+}
+
+class AppService {
+  + getAppList()
+  + createApp()
+  + associateEnv()
+}
+
+class EnvService {
+  + createEnv()
+}
+
+class Database {
+  + queryAppList()
+  + insertApp()
+  + insertEnv()
+  + updateAppEnv() 
+}
+
+class User {
+  - username
+  - password
+}
+
+class App {
+  - name
+  - owner
+}
+
+class Env {
+  - name
+  - namespace
+  - cluster
+}
+
+User "1" -- "1" LoginUI : interact 
+LoginUI "1" -- "1" LoginController : delegate
+LoginController "1" -- "1" AppService : call
+LoginController "1" -- "1" EnvService : call 
+AppService "1" -- "1" Database : CRUD
+EnvService "1" -- "1" Database : CRUD
+Database "1" -- "1" App : persist
+Database "1" -- "1" Env : persist
+
+@enduml
